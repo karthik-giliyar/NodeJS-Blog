@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Blog Articles</h1>
+        <a href = '/articles/create' class="btn btn-primary mb-4">Create Article</a>
+        <% articles.forEach(article => { %>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title"><%= article.title %></h2>
+                    <div class="card-subtitle text-muted"><%= article.createdAt.toLocaleDateString()%></div>
+                    <br/>
+                    <p class="card-text"><%= article.description %></p>
+                    <p class="card-text"><%- article.sanitizedHtml %></p>
+                    <a href="/articles/<%=article.slug%>" class="btn btn-primary">Read More</a>
+                    <a href="/articles/edit/<%=article.slug%>" class="btn btn-secondary">Edit</a>
+                    <button onclick="window.location.href='/articles/delete/<%=article.id%>'"  class="btn btn-danger">delete</button>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
